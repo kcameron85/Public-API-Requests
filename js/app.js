@@ -5,5 +5,7 @@
 */
 
 const usersURL = ``;
+const data = {};
+
 const fetching = new FetchRQST(`https://randomuser.me/api/`, 12, `us`);
 fetching.getUsers();

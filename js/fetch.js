@@ -9,7 +9,10 @@ class FetchRQST {
     getUsers() { 
         fetch(`${this.url}?results=${this.response}&nat=${this.lang}`)
             .then(response => response.json() )
-            .then(data => console.log(data.results) );
+            .then(data => {
+                const createUsers = new CreateHTML();
+                createUsers.generateUsers(data); 
+            });
     }
 
 }
