@@ -1,15 +1,15 @@
 class FetchRQST {
-    constructor(url, lang, response) {
+    constructor(url, response, lang) {
         this.url = url;
+        this.response = response;
         this.lang = lang;
-        this.reponse = response;
+
     }
 
-    usersURL = `${this.url}?results=${this.response}&nat=${this.lang}`;
-
     getUsers() { 
-        fetch(usersURL)
-            .then(response => response.json() );
+        fetch(`${this.url}?results=${this.response}&nat=${this.lang}`)
+            .then(response => response.json() )
+            .then(data => console.log(data.results) );
     }
 
 }
