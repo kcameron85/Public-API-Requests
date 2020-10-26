@@ -5,7 +5,10 @@
 */
 
 const usersURL = ``;
-const data = {};
+const data = {}; 
+
+const create = new CreateHTML();
+create.generateSearch();
 
 const fetching = new FetchRQST(`https://randomuser.me/api/`, 12, `us`);
 fetching.getUsers();
