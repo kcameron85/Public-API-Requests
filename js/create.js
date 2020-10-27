@@ -31,7 +31,7 @@ class CreateHTML {
         createInput('search', 'search-input', 'search-input');
         createInput('submit', 'search-submit', 'search-submit');
 
-        //adding attributes to 
+        //adding attributes to <input> Elements
         const searchBox = document.querySelector('#search-input');
         searchBox.placeholder = 'Search...';
         const button = document.querySelector('#search-submit');
