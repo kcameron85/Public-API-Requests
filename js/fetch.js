@@ -11,8 +11,9 @@ class FetchRQST {
             .then(response => response.json() )
             .then(data => {
                 const createUsers = new CreateHTML();
-                createUsers.generateUsers(data); 
-            });
+                createUsers.generateUsers(data);
+                createUsers.generateModal(data); 
+        });
     }
 
 }
