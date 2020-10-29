@@ -83,12 +83,16 @@ class CreateHTML {
             info.appendChild(cityState);
             cityState.classList = 'card-text cap';
             cityState.innerHTML = `${userData[i].location.city}, ${userData[i].location.state}`;
+
+            card.addEventListener('click', () => {
+                this.generateModal(userData, i);
+            });
+
         }
     }
 
-    generateModal(data) {
-        const modalData = data.results;
-        console.log(modalData);
+    generateModal(data, i) {
+        const modalData = data;
 
         function createP(pClass, content) {
             const p = document.createElement('p')
@@ -127,17 +131,28 @@ class CreateHTML {
         const modalImg = document.createElement('img');
         modalInfo.appendChild(modalImg);
         modalImg.classList = 'modal-img';
-        modalImg.src = modalData[0].picture.large;
+        modalImg.src = modalData[i].picture.large;
         modalImg.alt = 'profile picture';
 
         //inserting <p> elements into modal content container
-        createP('modal-text', modalData[0].email);
-        createP('modal-text cap', modalData[0].location.city);
+        createP('modal-text', modalData[i].email);
+        createP('modal-text cap', modalData[i].location.city);
         const hr = document.createElement('hr');
         modalInfo.appendChild(hr);
-        createP('modal-text cap', modalData[0].phone);
-        createP('modal-text', `${modalData[0].location.street.number} ${modalData[0].location.street.name}., ${modalData[0].location.city}, ${modalData[0].location.state} ${modalData[0].location.postcode}`);
-        createP('modal-text', `Birthday: ${modalData[0].dob.date}`);
+        createP('modal-text cap', modalData[i].phone);
+        createP('modal-text', `${modalData[i].location.street.number} ${modalData[i].location.street.name}., ${modalData[i].location.city}, ${modalData[i].location.state} ${modalData[i].location.postcode}`);
+        createP('modal-text', `Birthday: ${modalData[i].dob.date}`);        
+        
+        //converting date format with regex replace() method
+        let dateValue = modalData[i].dob.date;
+        let regexDate = /(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2}):(\d{2}).(\d{3})Z/;
+        let newDate = '$2-$3-$1';
+        dateValue.replace(regexDate, newDate);
+
+
+        closeIcon.addEventListener('click', () => {
+            modalContainer.remove();
+        });
 
     }
 }
