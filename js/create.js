@@ -145,7 +145,7 @@ class CreateHTML {
         
         //converting date format with regex replace() method
         let dateValue = modalData[i].dob.date;
-        let regexDate = /(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2}):(\d{2}).(\d{3})Z/;
+        let regexDate = /^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2}):(\d{2}).(\d{3})Z$/;
         let newDate = '$2-$3-$1';
         dateValue.replace(regexDate, newDate);
 
