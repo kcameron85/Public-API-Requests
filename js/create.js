@@ -134,23 +134,32 @@ class CreateHTML {
         modalImg.src = modalData[i].picture.large;
         modalImg.alt = 'profile picture';
 
-        //inserting <p> elements into modal content container
+        //INSERTING <p> ELEMENTS INTO MODAL INFO CONTAINER
         createP('modal-text', modalData[i].email);
         createP('modal-text cap', modalData[i].location.city);
         const hr = document.createElement('hr');
         modalInfo.appendChild(hr);
-        createP('modal-text cap', modalData[i].phone);
+
+        //converting phone number to required format useing string slice() method
+        let phone = modalData[i].phone;
+        const areaCode = phone.slice(1,4);
+        const prefix = phone.slice(6,9);
+        const subscriberNumber = phone.slice(10,14);
+        phone = `(${areaCode}) ${prefix}-${subscriberNumber}`;
+        createP('modal-text cap', phone);
+
         createP('modal-text', `${modalData[i].location.street.number} ${modalData[i].location.street.name}., ${modalData[i].location.city}, ${modalData[i].location.state} ${modalData[i].location.postcode}`);
-        createP('modal-text', `Birthday: ${modalData[i].dob.date}`);        
         
-        //converting date format with regex replace() method
+        //converting date format with string slice() method
         let dateValue = modalData[i].dob.date;
-        let regexDate = /^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2}):(\d{2}).(\d{3})Z$/;
-        let newDate = '$2-$3-$1';
-        dateValue.replace(regexDate, newDate);
+        const year = dateValue.slice(0,4);
+        const month = dateValue.slice(5,7);
+        const day = dateValue.slice(8,10);
+        dateValue = `${month}/${day}/${year}`;
+        createP('modal-text', `Birthday: ${dateValue}`);        
 
 
-        closeIcon.addEventListener('click', () => {
+        closeButton.addEventListener('click', () => {
             modalContainer.remove();
         });
 
