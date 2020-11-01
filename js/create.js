@@ -134,6 +134,11 @@ class CreateHTML {
         modalImg.src = modalData[i].picture.large;
         modalImg.alt = 'profile picture';
 
+        //inserting Users Name into Modal
+        const usersName = document.createElement('h3');
+        modalInfo.appendChild(usersName);
+        usersName.innerHTML = `${modalData[i].name.first} ${modalData[i].name.last}`;
+
         //INSERTING <p> ELEMENTS INTO MODAL INFO CONTAINER
         createP('modal-text', modalData[i].email);
         createP('modal-text cap', modalData[i].location.city);
